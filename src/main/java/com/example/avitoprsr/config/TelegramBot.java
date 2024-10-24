@@ -3,6 +3,7 @@ package com.example.avitoprsr.config;
 import com.example.avitoprsr.service.Parser;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -16,8 +17,8 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
+@Log4j
 public class TelegramBot extends TelegramLongPollingBot {
-
     private final BotConfig botConfig;
 
     @SneakyThrows
@@ -34,6 +35,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             } else {
                 try {
                     sendMessage(chatId, "Обрабатываю ваш запрос...");
+                    log.debug(messageText);
                     text = Parser.getUrl(messageText);
                 } catch (Exception e) {
                     sendMessage(chatId, "Невозможно обработать запрос \n " +

@@ -14,6 +14,7 @@ public class Parser {
         WebDriver webDriver = new ChromeDriver();
         Document doc;
         webDriver.get("https://www.avito.ru/sankt_peterburg_i_lo?q=" + req); //# Подключаемся к Авито с помощью Selenium
+
         doc = Jsoup.parse(webDriver.getPageSource()); //# Получаем код страницы
         webDriver.quit();
 
